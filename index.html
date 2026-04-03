@@ -331,7 +331,8 @@ async function doRegister() {
   if (!/^1\d{10}$/.test(phone)) { showToast('手机号格式不正确', 'error'); return; }
   
   const { error } = await supabase.from('users').insert({ account, name, user_type: type, phone });
-  if (error) { showToast('注册失败: ' + error.message, 'error'); return; }
+  console.log('注册响应:', error);
+  if (error) { showToast('注册失败: ' + JSON.stringify(error), 'error'); return; }
   
   showToast('注册成功', 'success');
   setTimeout(() => switchAuthTab('login'), 1000);
