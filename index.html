@@ -24,8 +24,6 @@
   --radius: 12px;
 }
 body { font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-
-/* Header */
 .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: var(--white); padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 16px rgba(26, 95, 180, 0.25); }
 .header-brand { display: flex; align-items: center; gap: 12px; font-size: 1.1rem; font-weight: 600; }
 .header-brand .logo { width: 36px; height: 36px; background: rgba(255,255,255,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
@@ -33,11 +31,9 @@ body { font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif; backgro
 .header-nav a { color: rgba(255,255,255,0.85); text-decoration: none; padding: 6px 14px; border-radius: 6px; font-size: 0.88rem; cursor: pointer; transition: all 0.2s; }
 .header-nav a:hover, .header-nav a.active { background: rgba(255,255,255,0.2); color: var(--white); }
 .header-user { display: flex; align-items: center; gap: 12px; }
-.user-info { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; }
-.user-avatar { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
 .btn { padding: 8px 20px; border: none; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; font-family: inherit; }
 .btn-primary { background: var(--primary); color: var(--white); }
-.btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+.btn-primary:hover { background: var(--primary-dark); }
 .btn-outline { background: transparent; border: 1.5px solid var(--primary); color: var(--primary); }
 .btn-outline:hover { background: var(--primary); color: var(--white); }
 .btn-danger { background: var(--danger); color: var(--white); }
@@ -46,15 +42,9 @@ body { font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif; backgro
 .btn-warning { background: var(--warning); color: var(--white); }
 .btn-sm { padding: 5px 14px; font-size: 0.82rem; }
 .btn-xs { padding: 3px 10px; font-size: 0.78rem; }
-
-/* Container */
 .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
-
-/* Cards */
 .card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.5rem; margin-bottom: 1.5rem; }
 .card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; gap: 8px; color: var(--primary); }
-
-/* Auth Container */
 .auth-container { min-height: calc(100vh - 64px); display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--primary) 0%, #0a369d 100%); }
 .auth-box { background: var(--white); border-radius: var(--radius); box-shadow: 0 8px 40px rgba(0,0,0,0.2); padding: 2.5rem; width: 100%; max-width: 420px; }
 .auth-title { text-align: center; margin-bottom: 2rem; }
@@ -63,16 +53,12 @@ body { font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif; backgro
 .form-group { margin-bottom: 1.2rem; }
 .form-group label { display: block; margin-bottom: 6px; font-weight: 500; font-size: 0.88rem; }
 .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.9rem; font-family: inherit; transition: border-color 0.2s; outline: none; }
-.form-group input:focus, .form-group select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26, 95, 180, 0.1); }
+.form-group input:focus, .form-group select:focus { border-color: var(--primary); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .auth-switch { text-align: center; margin-top: 1.5rem; font-size: 0.88rem; color: var(--text-light); }
 .auth-switch a { color: var(--primary); cursor: pointer; text-decoration: none; font-weight: 500; }
-
-/* Page views */
 .page { display: none; }
 .page.active { display: block; }
-
-/* Stats */
 .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
 .stat-card { background: var(--white); border-radius: var(--radius); padding: 1.2rem 1.4rem; box-shadow: var(--shadow); display: flex; align-items: center; gap: 1rem; }
 .stat-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
@@ -82,119 +68,75 @@ body { font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif; backgro
 .stat-icon.red { background: #ffebee; color: var(--danger); }
 .stat-value { font-size: 1.5rem; font-weight: 700; }
 .stat-label { font-size: 0.8rem; color: var(--text-light); }
-
-/* Filter bar */
 .filter-bar { background: var(--white); border-radius: var(--radius); padding: 1rem 1.4rem; margin-bottom: 1.5rem; box-shadow: var(--shadow); display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .filter-bar input, .filter-bar select { padding: 8px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.85rem; font-family: inherit; outline: none; }
-.filter-bar input:focus, .filter-bar select:focus { border-color: var(--primary); }
-
-/* Venue Grid */
 .venue-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
-.venue-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s; }
-.venue-card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(26, 95, 180, 0.15); }
+.venue-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: transform 0.2s; }
+.venue-card:hover { transform: translateY(-3px); }
 .venue-img { height: 150px; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--white); position: relative; }
 .venue-img.blue { background: linear-gradient(135deg, var(--primary-light), var(--primary)); }
 .venue-img.orange { background: linear-gradient(135deg, #ff9800, #f57c00); }
 .venue-img.green { background: linear-gradient(135deg, #26a69a, #00897b); }
-.venue-img.purple { background: linear-gradient(135deg, #7e57c2, #5e35b1); }
 .venue-badge { position: absolute; top: 10px; right: 10px; padding: 3px 10px; border-radius: 20px; font-size: 0.72rem; color: var(--white); font-weight: 500; }
 .venue-badge.open { background: rgba(67, 160, 71, 0.85); }
 .venue-badge.busy { background: rgba(229, 57, 53, 0.85); }
 .venue-body { padding: 1rem 1.2rem; }
 .venue-name { font-size: 0.98rem; font-weight: 600; margin-bottom: 6px; }
-.venue-info { font-size: 0.8rem; color: var(--text-light); margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
+.venue-info { font-size: 0.8rem; color: var(--text-light); margin-bottom: 4px; }
 .venue-tags { display: flex; gap: 5px; margin-top: 8px; flex-wrap: wrap; }
 .tag { padding: 2px 10px; border-radius: 20px; font-size: 0.72rem; background: var(--secondary); color: var(--primary); }
 .tag.green { background: #e8f5e9; color: var(--success); }
 .tag.orange { background: #fff3e0; color: var(--warning); }
 .venue-footer { padding: 0.75rem 1.2rem; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; }
-
-/* Table */
 .table-wrap { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
 thead th { background: var(--secondary); padding: 10px 12px; text-align: left; font-weight: 600; color: var(--primary-dark); white-space: nowrap; }
 tbody td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
 tbody tr:hover { background: #f8fafc; }
-.status { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 500; }
+.status { display: inline-flex; padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 500; }
 .status.pending { background: #fff3e0; color: var(--warning); }
 .status.approved { background: #e8f5e9; color: var(--success); }
 .status.rejected { background: #ffebee; color: var(--danger); }
-.status.completed { background: var(--secondary); color: var(--primary); }
-
-/* Modal */
 .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 200; padding: 1rem; }
 .modal-overlay.show { display: flex; }
-.modal { background: var(--white); border-radius: var(--radius); width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
-.modal-header { padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-weight: 600; font-size: 1rem; }
-.modal-close { width: 28px; height: 28px; border-radius: 50%; border: none; background: #f0f0f0; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
-.modal-close:hover { background: #e0e0e0; }
+.modal { background: var(--white); border-radius: var(--radius); width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto; }
+.modal-header { padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-weight: 600; }
+.modal-close { width: 28px; height: 28px; border-radius: 50%; border: none; background: #f0f0f0; cursor: pointer; font-size: 1rem; }
 .modal-body { padding: 1.5rem; }
 .modal-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
-
-/* Tabs */
 .tabs { display: flex; gap: 4px; border-bottom: 2px solid var(--border); margin-bottom: 1.5rem; }
-.tab { padding: 10px 18px; cursor: pointer; border: none; background: transparent; font-size: 0.9rem; font-family: inherit; color: var(--text-light); border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
+.tab { padding: 10px 18px; cursor: pointer; border: none; background: transparent; font-size: 0.9rem; font-family: inherit; color: var(--text-light); border-bottom: 2px solid transparent; margin-bottom: -2px; }
 .tab:hover { color: var(--primary); }
 .tab.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 600; }
-
-/* Toast */
-.toast { position: fixed; top: 80px; right: 20px; background: var(--white); border-radius: var(--radius); padding: 12px 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 300; display: none; align-items: center; gap: 10px; font-size: 0.88rem; max-width: 300px; border-left: 4px solid var(--primary); }
+.toast { position: fixed; top: 80px; right: 20px; background: var(--white); border-radius: var(--radius); padding: 12px 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 300; display: none; font-size: 0.88rem; max-width: 300px; border-left: 4px solid var(--primary); }
 .toast.show { display: flex; }
 .toast.success { border-left-color: var(--success); }
 .toast.error { border-left-color: var(--danger); }
-.toast.warning { border-left-color: var(--warning); }
-
-/* Loading */
 .loading { text-align: center; padding: 2rem; color: var(--text-light); }
-
-/* Empty state */
 .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-light); }
-.empty-state .icon { font-size: 3rem; margin-bottom: 1rem; }
-
-/* Responsive */
-@media (max-width: 768px) {
-  .header { padding: 0 1rem; }
-  .header-nav { display: none; }
-  .container { padding: 1rem; }
-  .venue-grid { grid-template-columns: 1fr; }
-  .stats-grid { grid-template-columns: 1fr 1fr; }
-  .form-row { grid-template-columns: 1fr; }
-}
+@media (max-width: 768px) { .header { padding: 0 1rem; } .header-nav { display: none; } .container { padding: 1rem; } .venue-grid { grid-template-columns: 1fr; } .stats-grid { grid-template-columns: 1fr 1fr; } .form-row { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
-<!-- Header -->
 <div class="header">
-  <div class="header-brand">
-    <div class="logo">🏫</div>
-    <span>甘肃中医药大学 - 场地预约系统</span>
-  </div>
+  <div class="header-brand"><div class="logo">🏫</div><span>甘肃中医药大学 - 场地预约系统</span></div>
   <nav class="header-nav">
     <a class="active" onclick="showPage('home')">首页</a>
     <a onclick="showPage('venues')">场地列表</a>
     <a onclick="showPage('my-bookings')">我的预约</a>
     <a onclick="showPage('admin')" id="adminNavLink" style="display:none;">管理后台</a>
   </nav>
-  <div class="header-user">
-    <span id="navUserName"></span>
-    <button class="btn btn-sm" style="background:rgba(255,255,255,0.2);color:white;" onclick="logout()">退出</button>
-  </div>
+  <div class="header-user"><span id="navUserName"></span><button class="btn btn-sm" style="background:rgba(255,255,255,0.2);color:white;" onclick="logout()">退出</button></div>
 </div>
 
-<!-- Auth Page -->
 <div id="authPage" class="auth-container">
   <div class="auth-box">
-    <div class="auth-title">
-      <h2>🏫 校园场地预约</h2>
-      <p>甘肃中医药大学官方平台</p>
-    </div>
+    <div class="auth-title"><h2>🏫 校园场地预约</h2><p>甘肃中医药大学官方平台</p></div>
     <div class="tabs" style="margin-bottom:1.5rem;">
       <button class="tab active" onclick="switchAuthTab('login')">用户登录</button>
       <button class="tab" onclick="switchAuthTab('admin-login')">管理员登录</button>
     </div>
-    
-    <!-- User Login -->
     <div id="loginForm">
       <div class="form-group"><label>身份</label><select id="loginUserType"><option value="student">学生</option><option value="teacher">教师</option></select></div>
       <div class="form-group"><label>学号/工号</label><input type="text" id="loginAccount" placeholder="请输入学号或工号"></div>
@@ -202,8 +144,6 @@ tbody tr:hover { background: #f8fafc; }
       <button class="btn btn-primary" style="width:100%;padding:12px;" onclick="doLogin()">登 录</button>
       <div class="auth-switch">还没有账号？<a onclick="switchAuthTab('register')">立即注册</a></div>
     </div>
-    
-    <!-- User Register -->
     <div id="registerForm" style="display:none;">
       <div class="form-group"><label>身份</label><select id="regUserType"><option value="student">学生</option><option value="teacher">教师</option></select></div>
       <div class="form-group"><label>学号/工号</label><input type="text" id="regAccount" placeholder="请输入学号或工号"></div>
@@ -213,8 +153,6 @@ tbody tr:hover { background: #f8fafc; }
       <button class="btn btn-primary" style="width:100%;padding:12px;" onclick="doRegister()">注 册</button>
       <div class="auth-switch">已有账号？<a onclick="switchAuthTab('login')">立即登录</a></div>
     </div>
-    
-    <!-- Admin Login -->
     <div id="adminLoginForm" style="display:none;">
       <div class="form-group"><label>管理员账号</label><input type="text" id="adminAccount" placeholder="请输入管理员账号"></div>
       <div class="form-group"><label>密码</label><input type="password" id="adminPassword" placeholder="请输入密码"></div>
@@ -223,9 +161,7 @@ tbody tr:hover { background: #f8fafc; }
   </div>
 </div>
 
-<!-- Main Content -->
 <div id="mainPage" style="display:none;">
-  <!-- Home Page -->
   <div id="homePage" class="page active">
     <div class="container">
       <div class="card"><h2 class="card-title">👋 欢迎使用</h2><p style="color:var(--text-light);">您好，<span id="homeUserName"></span>！欢迎使用甘肃中医药大学校园场地预约系统。</p></div>
@@ -238,24 +174,19 @@ tbody tr:hover { background: #f8fafc; }
       <div class="card"><h2 class="card-title">🔥 热门场地</h2><div class="venue-grid" id="homeVenues"><div class="loading">加载中...</div></div></div>
     </div>
   </div>
-  
-  <!-- Venues Page -->
   <div id="venuesPage" class="page">
     <div class="container">
       <div class="card">
         <h2 class="card-title">📋 场地列表</h2>
         <div class="filter-bar">
           <select id="filterType" onchange="loadVenues()"><option value="">全部类型</option><option value="体育馆">🏃 体育馆</option><option value="教室">🏫 教室</option><option value="会议室">🏢 会议室</option></select>
-          <input type="date" id="filterDate" onchange="loadVenues()">
           <button class="btn btn-primary btn-sm" onclick="loadVenues()">筛选</button>
-          <button class="btn btn-outline btn-sm" onclick="document.getElementById('filterType').value='';document.getElementById('filterDate').value='';loadVenues()">重置</button>
+          <button class="btn btn-outline btn-sm" onclick="document.getElementById('filterType').value='';loadVenues()">重置</button>
         </div>
         <div class="venue-grid" id="venueList"><div class="loading">加载中...</div></div>
       </div>
     </div>
   </div>
-  
-  <!-- My Bookings Page -->
   <div id="myBookingsPage" class="page">
     <div class="container">
       <div class="card">
@@ -265,8 +196,6 @@ tbody tr:hover { background: #f8fafc; }
       </div>
     </div>
   </div>
-  
-  <!-- Admin Page -->
   <div id="adminPage" class="page">
     <div class="container">
       <div class="card">
@@ -286,7 +215,6 @@ tbody tr:hover { background: #f8fafc; }
   </div>
 </div>
 
-<!-- Booking Modal -->
 <div id="bookingModal" class="modal-overlay">
   <div class="modal">
     <div class="modal-header">📝 预约场地<button class="modal-close" onclick="closeModal('bookingModal')">×</button></div>
@@ -307,7 +235,6 @@ tbody tr:hover { background: #f8fafc; }
   </div>
 </div>
 
-<!-- Add Venue Modal -->
 <div id="addVenueModal" class="modal-overlay">
   <div class="modal">
     <div class="modal-header">➕ 添加场地<button class="modal-close" onclick="closeModal('addVenueModal')">×</button></div>
@@ -322,63 +249,17 @@ tbody tr:hover { background: #f8fafc; }
   </div>
 </div>
 
-<!-- Toast -->
 <div id="toast" class="toast"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// ========== Supabase Config ==========
-const SUPABASE_URL = 'https://dmebzodstgyjvcxmzvut.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRtZWJ6b2RzdGd5anZjeG16enV0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE2OTM2MTYsImV4cCI6MjA1NzI2OTYxNn0.xbO6sCkBvsK1OH8pADW3mGd9_rB9R6pMLWOT4voB7Gk';
+const { createClient } = window.supabase;
+const supabase = createClient('https://dmebzodstgyjvcxmzvut.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRtZWJ6b2RzdGd5anZjeG16enV0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE2OTM2MTYsImV4cCI6MjA1NzI2OTYxNn0.xbO6sCkBvsK1OH8pADW3mGd9_rB9R6pMLWOT4voB7Gk');
 
-// Simple fetch wrapper for Supabase REST API
-async function supabaseRequest(table, options = {}) {
-  const { method = 'GET', body = null, params = {} } = options;
-  const url = new URL(`${SUPABASE_URL}/rest/v1/${table}`);
-  Object.keys(params).forEach(k => url.searchParams.append(k, params[k]));
-  
-  const headers = {
-    'apikey': SUPABASE_KEY,
-    'Authorization': `Bearer ${SUPABASE_KEY}`,
-    'Content-Type': 'application/json',
-    'Prefer': 'return=representation'
-  };
-  if (options.single) headers['Prefer'] = 'return=representation';
-  
-  const config = { method, headers };
-  if (body) config.body = JSON.stringify(body);
-  if (Object.keys(params).length) config.url = url.toString();
-  
-  // Use proxy to avoid CORS - append to existing URL
-  const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(config.url || url.toString())}`;
-  const proxyConfig = { ...config, url: proxyUrl };
-  
-  try {
-    const res = await fetch(proxyConfig.url, {
-      method: config.method,
-      headers: config.headers
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.message || '请求失败');
-    return { data, error: null };
-  } catch (err) {
-    // Fallback: try direct
-    try {
-      const res = await fetch(url.toString(), { method, headers, body });
-      const data = await res.json();
-      return { data, error: res.ok ? null : data };
-    } catch {
-      return { data: null, error: err.message };
-    }
-  }
-}
-
-// ========== Data State ==========
 let currentUser = null;
 let isAdmin = false;
 let venues = [];
-let bookings = [];
 
-// ========== Init ==========
 function init() {
   const savedUser = localStorage.getItem('campusUser');
   const savedAdmin = localStorage.getItem('campusAdmin');
@@ -389,11 +270,11 @@ function init() {
 }
 document.addEventListener('DOMContentLoaded', init);
 
-// ========== Auth ==========
 function showAuth() { 
   document.getElementById('authPage').style.display = 'flex'; 
   document.getElementById('mainPage').style.display = 'none'; 
 }
+
 function showMainPage() {
   document.getElementById('authPage').style.display = 'none';
   document.getElementById('mainPage').style.display = 'block';
@@ -412,15 +293,16 @@ function showMainPage() {
     loadMyBookings();
   }
 }
+
 function switchAuthTab(tab) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   event.target.classList.add('active');
   document.getElementById('loginForm').style.display = 'none';
   document.getElementById('registerForm').style.display = 'none';
   document.getElementById('adminLoginForm').style.display = 'none';
-  if (tab === 'login') { document.getElementById('loginForm').style.display = 'block'; }
-  else if (tab === 'register') { document.getElementById('registerForm').style.display = 'block'; }
-  else if (tab === 'admin-login') { document.getElementById('adminLoginForm').style.display = 'block'; }
+  if (tab === 'login') document.getElementById('loginForm').style.display = 'block';
+  else if (tab === 'register') document.getElementById('registerForm').style.display = 'block';
+  else if (tab === 'admin-login') document.getElementById('adminLoginForm').style.display = 'block';
 }
 
 async function doLogin() {
@@ -429,26 +311,11 @@ async function doLogin() {
   const password = document.getElementById('loginPassword').value;
   if (!account || !password) { showToast('请填写完整信息', 'error'); return; }
   
-  const { data, error } = await supabaseRequest('users', { 
-    params: { account: `eq.${account}`, select: '*' } 
-  });
+  const { data, error } = await supabase.from('users').select('*').eq('account', account).single();
+  if (error || !data) { showToast('账号或密码错误', 'error'); return; }
+  if (data.user_type !== type) { showToast('身份选择错误', 'error'); return; }
   
-  if (error || !data || data.length === 0) {
-    showToast('账号或密码错误', 'error'); return;
-  }
-  
-  const user = data[0];
-  if (user.user_type !== type) {
-    showToast('身份选择错误', 'error'); return;
-  }
-  
-  currentUser = { 
-    id: user.id, 
-    account: user.account, 
-    name: user.name, 
-    type: user.user_type, 
-    phone: user.phone 
-  };
+  currentUser = { id: data.id, account: data.account, name: data.name, type: data.user_type, phone: data.phone };
   localStorage.setItem('campusUser', JSON.stringify(currentUser));
   showToast('登录成功', 'success');
   showMainPage();
@@ -463,22 +330,14 @@ async function doRegister() {
   if (!account || !name || !phone || !password) { showToast('请填写完整信息', 'error'); return; }
   if (!/^1\d{10}$/.test(phone)) { showToast('手机号格式不正确', 'error'); return; }
   
-  // Check if account exists
-  const { data } = await supabaseRequest('users', { params: { account: `eq.${account}`, select: 'id' } });
-  if (data && data.length > 0) { showToast('账号已存在', 'error'); return; }
-  
-  const { error } = await supabaseRequest('users', {
-    method: 'POST',
-    body: { account, name, user_type: type, phone }
-  });
-  
-  if (error) { showToast('注册失败: ' + error, 'error'); return; }
+  const { error } = await supabase.from('users').insert({ account, name, user_type: type, phone });
+  if (error) { showToast('注册失败: ' + error.message, 'error'); return; }
   
   showToast('注册成功', 'success');
-  switchAuthTab('login');
+  setTimeout(() => switchAuthTab('login'), 1000);
 }
 
-async function doAdminLogin() {
+function doAdminLogin() {
   const account = document.getElementById('adminAccount').value.trim();
   const password = document.getElementById('adminPassword').value;
   if (account === 'admin' && password === 'admin123') {
@@ -488,9 +347,9 @@ async function doAdminLogin() {
     showMainPage();
   } else { showToast('账号或密码错误', 'error'); }
 }
+
 function logout() { localStorage.removeItem('campusUser'); localStorage.removeItem('campusAdmin'); location.reload(); }
 
-// ========== Navigation ==========
 function showPage(pageId) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.header-nav a').forEach(a => a.classList.remove('active'));
@@ -502,26 +361,17 @@ function showPage(pageId) {
   if (pageId === 'admin' && isAdmin) loadAdminData();
 }
 
-// ========== Venues ==========
 async function loadVenues() {
   const typeFilter = document.getElementById('filterType')?.value || '';
-  
-  let params = { select: '*', order: 'created_at' };
-  if (typeFilter) params.type = `eq.${typeFilter}`;
-  
-  const { data, error } = await supabaseRequest('venues', { params });
-  
-  if (error) { 
-    document.getElementById('venueList').innerHTML = '<div class="empty-state"><div class="icon">❌</div><p>加载失败</p></div>';
-    return; 
-  }
+  let query = supabase.from('venues').select('*').order('created_at');
+  if (typeFilter) query = query.eq('type', typeFilter);
+  const { data, error } = await query;
+  if (error) { document.getElementById('venueList').innerHTML = '<div class="empty-state"><p>加载失败</p></div>'; return; }
   
   venues = data || [];
-  
   const html = venues.length ? venues.map(v => `
     <div class="venue-card">
-      <div class="venue-img ${v.type === '体育馆' ? 'blue' : v.type === '会议室' ? 'orange' : 'green'}">
-        ${v.icon || '🏢'}
+      <div class="venue-img ${v.type === '体育馆' ? 'blue' : v.type === '会议室' ? 'orange' : 'green'}">${v.icon || '🏢'}
         <span class="venue-badge ${v.status === 'open' ? 'open' : 'busy'}">${v.status === 'open' ? '可预约' : '已满'}</span>
       </div>
       <div class="venue-body">
@@ -529,33 +379,23 @@ async function loadVenues() {
         <div class="venue-info">📍 ${v.location || '-'}</div>
         <div class="venue-info">👥 容纳${v.capacity || 0}人</div>
         <div class="venue-info">⏰ ${v.open_time || '-'}</div>
-        <div class="venue-tags">
-          <span class="tag">${v.type}</span>
-          ${v.status === 'open' ? '<span class="tag green">可预约</span>' : '<span class="tag orange">已满</span>'}
-        </div>
+        <div class="venue-tags"><span class="tag">${v.type}</span>${v.status === 'open' ? '<span class="tag green">可预约</span>' : '<span class="tag orange">已满</span>'}</div>
       </div>
-      <div class="venue-footer">
-        ${!isAdmin && v.status === 'open' ? `<button class="btn btn-primary btn-sm" onclick="openBookingModal('${v.id}', '${v.name}')">立即预约</button>` : ''}
-      </div>
-    </div>`).join('') : '<div class="empty-state"><div class="icon">📭</div><p>暂无场地</p></div>';
+      <div class="venue-footer">${!isAdmin && v.status === 'open' ? `<button class="btn btn-primary btn-sm" onclick="openBookingModal('${v.id}', '${v.name}')">立即预约</button>` : ''}</div>
+    </div>`).join('') : '<div class="empty-state"><p>暂无场地</p></div>';
   
   document.getElementById('venueList').innerHTML = html;
-  document.getElementById('homeVenues').innerHTML = venues.length ? html : '<div class="empty-state"><div class="icon">📭</div><p>暂无场地</p></div>';
+  document.getElementById('homeVenues').innerHTML = venues.length ? html : '<div class="empty-state"><p>暂无场地</p></div>';
   
-  // Populate venue select in booking modal
   const select = document.getElementById('bookVenue');
-  if (select) {
-    select.innerHTML = '<option value="">请选择场地</option>' + 
-      venues.filter(v => v.status === 'open').map(v => `<option value="${v.id}|${v.name}">${v.icon || '🏢'} ${v.name}</option>`).join('');
-  }
+  if (select) select.innerHTML = '<option value="">请选择场地</option>' + venues.filter(v => v.status === 'open').map(v => `<option value="${v.id}|${v.name}">${v.icon || '🏢'} ${v.name}</option>`).join('');
 }
 
 async function loadVenuesToSelect() {
-  const { data } = await supabaseRequest('venues', { params: { select: 'id,name,icon,status' } });
+  const { data } = await supabase.from('venues').select('id,name,icon,status');
   venues = data || [];
 }
 
-// ========== Bookings ==========
 function openBookingModal(venueId, venueName) {
   document.getElementById('bookVenue').value = venueId + '|' + venueName;
   document.getElementById('bookingModal').classList.add('show');
@@ -566,31 +406,20 @@ async function submitBooking() {
   const date = document.getElementById('bookDate').value;
   const time = document.getElementById('bookTime').value;
   const purpose = document.getElementById('bookPurpose').value.trim();
-  
   if (!venueValue || !date || !time || !purpose) { showToast('请填写完整信息', 'error'); return; }
   
   const [venueId, venueName] = venueValue.split('|');
   const today = new Date().toISOString().split('T')[0];
   if (date < today) { showToast('不能预约过去的日期', 'error'); return; }
   
-  const { error } = await supabaseRequest('bookings', {
-    method: 'POST',
-    body: {
-      venue_id: venueId,
-      venue_name: venueName,
-      user_id: currentUser.id,
-      user_account: currentUser.account,
-      user_name: currentUser.name,
-      user_type: currentUser.type === 'student' ? '学生' : '教师',
-      book_date: date,
-      book_time: time,
-      purpose,
-      status: 'pending'
-    }
+  const { error } = await supabase.from('bookings').insert({
+    venue_id: venueId, venue_name: venueName, user_id: currentUser.id,
+    user_account: currentUser.account, user_name: currentUser.name,
+    user_type: currentUser.type === 'student' ? '学生' : '教师',
+    book_date: date, book_time: time, purpose, status: 'pending'
   });
   
-  if (error) { showToast('预约失败: ' + error, 'error'); return; }
-  
+  if (error) { showToast('预约失败: ' + error.message, 'error'); return; }
   showToast('预约成功，请等待审核', 'success');
   closeModal('bookingModal');
   document.getElementById('bookDate').value = '';
@@ -601,20 +430,13 @@ async function submitBooking() {
 
 async function loadMyBookings() {
   const filter = document.getElementById('myBookingFilter')?.value || '';
-  let params = { select: '*', order: 'created_at.desc' };
-  
-  if (filter) params.status = `eq.${filter}`;
-  
-  const { data, error } = await supabaseRequest('bookings', { params });
-  
-  if (error) { 
-    document.getElementById('myBookingList').innerHTML = '<tr><td colspan="6" style="text-align:center;color:#999;">加载失败</td></tr>';
-    return; 
-  }
+  let query = supabase.from('bookings').select('*').order('created_at', { ascending: false });
+  if (filter) query = query.eq('status', filter);
+  const { data, error } = await query;
+  if (error) { document.getElementById('myBookingList').innerHTML = '<tr><td colspan="6" style="text-align:center;">加载失败</td></tr>'; return; }
   
   const myBookings = (data || []).filter(b => b.user_account === currentUser.account);
   const statusMap = { pending: ['待审核', 'pending'], approved: ['已通过', 'approved'], rejected: ['已拒绝', 'rejected'], cancelled: ['已取消', 'cancelled'] };
-  
   document.getElementById('myBookingList').innerHTML = myBookings.length ? myBookings.map(b => {
     const [text, cls] = statusMap[b.status] || [b.status, ''];
     return `<tr><td>${b.venue_name}</td><td>${b.book_date}</td><td>${b.book_time}</td><td>${b.purpose}</td><td><span class="status ${cls}">${text}</span></td><td>${b.status === 'pending' ? `<button class="btn btn-danger btn-xs" onclick="cancelBooking('${b.id}')">取消</button>` : '-'}</td></tr>`;
@@ -623,61 +445,50 @@ async function loadMyBookings() {
 
 async function cancelBooking(id) {
   if (!confirm('确定取消吗？')) return;
-  const { error } = await supabaseRequest(`bookings?id=eq.${id}`, { 
-    method: 'PATCH', 
-    body: { status: 'cancelled' } 
-  });
+  const { error } = await supabase.from('bookings').update({ status: 'cancelled' }).eq('id', id);
   if (error) { showToast('取消失败', 'error'); return; }
   showToast('已取消', 'success');
   loadMyBookings();
 }
 
-// ========== Stats ==========
 async function updateStats() {
-  const { data: allBookings } = await supabaseRequest('bookings', { params: { select: 'status' } });
+  const { data: allBookings } = await supabase.from('bookings').select('status');
+  const { data: openVenues } = await supabase.from('venues').select('id', { count: 'exact' });
   const myBookings = (allBookings || []).filter(b => b.user_account === currentUser.account);
-  const { data: openVenues } = await supabaseRequest('venues', { params: { status: 'eq.open', select: 'id' } });
-  
   document.getElementById('statTotal').textContent = myBookings.length;
   document.getElementById('statPending').textContent = myBookings.filter(b => b.status === 'pending').length;
   document.getElementById('statApproved').textContent = myBookings.filter(b => b.status === 'approved').length;
-  document.getElementById('statVenues').textContent = (openVenues || []).length;
+  document.getElementById('statVenues').textContent = openVenues?.length || 0;
 }
 
-// ========== Admin ==========
 async function loadAdminData() {
-  // Load pending
-  const { data: pending } = await supabaseRequest('bookings', { 
-    params: { status: 'eq.pending', select: '*', order: 'created_at.desc' } 
-  });
+  const { data: pending } = await supabase.from('bookings').select('*').eq('status', 'pending').order('created_at', { ascending: false });
   document.getElementById('pendingList').innerHTML = (pending && pending.length) ? pending.map(b => 
     `<tr><td>${b.user_name}</td><td>${b.user_type}</td><td>${b.venue_name}</td><td>${b.book_date}</td><td>${b.book_time}</td><td>${b.purpose}</td><td><button class="btn btn-success btn-xs" onclick="approveBooking('${b.id}')">通过</button><button class="btn btn-danger btn-xs" onclick="rejectBooking('${b.id}')" style="margin-left:5px;">拒绝</button></td></tr>`
   ).join('') : '<tr><td colspan="7" style="text-align:center;color:#999;">暂无待审核</td></tr>';
   
-  // Load all bookings
-  const { data: allBookings } = await supabaseRequest('bookings', { params: { order: 'created_at.desc' } });
+  const { data: allBookings } = await supabase.from('bookings').select('*').order('created_at', { ascending: false });
   const statusMap = { pending: ['待审核', 'pending'], approved: ['已通过', 'approved'], rejected: ['已拒绝', 'rejected'], cancelled: ['已取消', 'cancelled'] };
-  document.getElementById('allBookingList').innerHTML = (allBooks && allBooks.length) ? allBooks.map(b => { 
+  document.getElementById('allBookingList').innerHTML = (allBookings && allBookings.length) ? allBookings.map(b => { 
     const [text, cls] = statusMap[b.status] || [b.status, '']; 
     return `<tr><td>${b.user_name}</td><td>${b.user_type}</td><td>${b.venue_name}</td><td>${b.book_date}</td><td>${b.book_time}</td><td><span class="status ${cls}">${text}</span></td></tr>`; 
   }).join('') : '<tr><td colspan="6" style="text-align:center;color:#999;">暂无记录</td></tr>';
   
-  // Load venues
-  const { data: venueList } = await supabaseRequest('venues', { params: { order: 'created_at.desc' } });
+  const { data: venueList } = await supabase.from('venues').select('*').order('created_at', { ascending: false });
   document.getElementById('venueManageList').innerHTML = (venueList && venueList.length) ? venueList.map(v => 
     `<tr><td>${v.icon || '🏢'} ${v.name}</td><td>${v.type}</td><td>${v.location || '-'}</td><td><span class="status ${v.status === 'open' ? 'approved' : 'rejected'}">${v.status === 'open' ? '启用' : '停用'}</span></td><td><button class="btn btn-xs ${v.status === 'open' ? 'btn-danger' : 'btn-success'}" onclick="toggleVenue('${v.id}', '${v.status}')">${v.status === 'open' ? '停用' : '启用'}</button></td></tr>`
   ).join('') : '<tr><td colspan="5" style="text-align:center;color:#999;">暂无场地</td></tr>';
 }
 
 async function approveBooking(id) {
-  const { error } = await supabaseRequest(`bookings?id=eq.${id}`, { method: 'PATCH', body: { status: 'approved' } });
+  const { error } = await supabase.from('bookings').update({ status: 'approved' }).eq('id', id);
   if (error) { showToast('操作失败', 'error'); return; }
   showToast('已通过', 'success');
   loadAdminData();
 }
 
 async function rejectBooking(id) {
-  const { error } = await supabaseRequest(`bookings?id=eq.${id}`, { method: 'PATCH', body: { status: 'rejected' } });
+  const { error } = await supabase.from('bookings').update({ status: 'rejected' }).eq('id', id);
   if (error) { showToast('操作失败', 'error'); return; }
   showToast('已拒绝', 'success');
   loadAdminData();
@@ -685,14 +496,14 @@ async function rejectBooking(id) {
 
 async function toggleVenue(id, currentStatus) {
   const newStatus = currentStatus === 'open' ? 'busy' : 'open';
-  const { error } = await supabaseRequest(`venues?id=eq.${id}`, { method: 'PATCH', body: { status: newStatus } });
+  const { error } = await supabase.from('venues').update({ status: newStatus }).eq('id', id);
   if (error) { showToast('操作失败', 'error'); return; }
   showToast('已更新', 'success');
   loadAdminData();
   loadVenues();
 }
 
-async function showAddVenueModal() { document.getElementById('addVenueModal').classList.add('show'); }
+function showAddVenueModal() { document.getElementById('addVenueModal').classList.add('show'); }
 
 async function submitAddVenue() {
   const name = document.getElementById('addVenueName').value.trim();
@@ -701,13 +512,8 @@ async function submitAddVenue() {
   const capacity = document.getElementById('addVenueCapacity').value;
   const time = document.getElementById('addVenueTime').value;
   if (!name || !type || !location) { showToast('请填写完整信息', 'error'); return; }
-  
   const icons = { '体育馆': '🏃', '教室': '🏫', '会议室': '🏢' };
-  const { error } = await supabaseRequest('venues', {
-    method: 'POST',
-    body: { name, type, icon: icons[type] || '🏢', location, capacity: capacity || 0, open_time: time || '08:00-22:00', status: 'open' }
-  });
-  
+  const { error } = await supabase.from('venues').insert({ name, type, icon: icons[type] || '🏢', location, capacity: capacity || 0, open_time: time || '08:00-22:00', status: 'open' });
   if (error) { showToast('添加失败', 'error'); return; }
   showToast('添加成功', 'success');
   closeModal('addVenueModal');
@@ -717,11 +523,9 @@ async function submitAddVenue() {
   loadAdminData();
 }
 
-// ========== Modal ==========
 function closeModal(id) { document.getElementById(id).classList.remove('show'); }
 document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('show'); }));
 
-// ========== Toast ==========
 function showToast(msg, type = 'info') { const t = document.getElementById('toast'); t.textContent = msg; t.className = 'toast show ' + type; t.style.display = 'flex'; setTimeout(() => t.classList.remove('show'), 3000); }
 </script>
 </body>
