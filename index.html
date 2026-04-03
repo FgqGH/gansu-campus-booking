@@ -144,6 +144,9 @@ tbody tr:hover { background: #f8fafc; }
 .toast.error { border-left-color: var(--danger); }
 .toast.warning { border-left-color: var(--warning); }
 
+/* Loading */
+.loading { text-align: center; padding: 2rem; color: var(--text-light); }
+
 /* Empty state */
 .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-light); }
 .empty-state .icon { font-size: 3rem; margin-bottom: 1rem; }
@@ -227,12 +230,12 @@ tbody tr:hover { background: #f8fafc; }
     <div class="container">
       <div class="card"><h2 class="card-title">👋 欢迎使用</h2><p style="color:var(--text-light);">您好，<span id="homeUserName"></span>！欢迎使用甘肃中医药大学校园场地预约系统。</p></div>
       <div class="stats-grid">
-        <div class="stat-card"><div class="stat-icon blue">📊</div><div><div class="stat-value" id="statTotal">0</div><div class="stat-label">本周预约</div></div></div>
-        <div class="stat-card"><div class="stat-icon orange">⏳</div><div><div class="stat-value" id="statPending">0</div><div class="stat-label">待审核</div></div></div>
-        <div class="stat-card"><div class="stat-icon green">✅</div><div><div class="stat-value" id="statApproved">0</div><div class="stat-label">已通过</div></div></div>
-        <div class="stat-card"><div class="stat-icon red">🏃</div><div><div class="stat-value" id="statVenues">0</div><div class="stat-label">可用场地</div></div></div>
+        <div class="stat-card"><div class="stat-icon blue">📊</div><div><div class="stat-value" id="statTotal">-</div><div class="stat-label">本周预约</div></div></div>
+        <div class="stat-card"><div class="stat-icon orange">⏳</div><div><div class="stat-value" id="statPending">-</div><div class="stat-label">待审核</div></div></div>
+        <div class="stat-card"><div class="stat-icon green">✅</div><div><div class="stat-value" id="statApproved">-</div><div class="stat-label">已通过</div></div></div>
+        <div class="stat-card"><div class="stat-icon red">🏃</div><div><div class="stat-value" id="statVenues">-</div><div class="stat-label">可用场地</div></div></div>
       </div>
-      <div class="card"><h2 class="card-title">🔥 热门场地</h2><div class="venue-grid" id="homeVenues"></div></div>
+      <div class="card"><h2 class="card-title">🔥 热门场地</h2><div class="venue-grid" id="homeVenues"><div class="loading">加载中...</div></div></div>
     </div>
   </div>
   
@@ -247,7 +250,7 @@ tbody tr:hover { background: #f8fafc; }
           <button class="btn btn-primary btn-sm" onclick="loadVenues()">筛选</button>
           <button class="btn btn-outline btn-sm" onclick="document.getElementById('filterType').value='';document.getElementById('filterDate').value='';loadVenues()">重置</button>
         </div>
-        <div class="venue-grid" id="venueList"></div>
+        <div class="venue-grid" id="venueList"><div class="loading">加载中...</div></div>
       </div>
     </div>
   </div>
@@ -258,7 +261,7 @@ tbody tr:hover { background: #f8fafc; }
       <div class="card">
         <h2 class="card-title">📜 我的预约</h2>
         <div style="margin-bottom:1rem;"><select id="myBookingFilter" onchange="loadMyBookings()"><option value="">全部状态</option><option value="pending">待审核</option><option value="approved">已通过</option><option value="rejected">已拒绝</option></select></div>
-        <div class="table-wrap"><table><thead><tr><th>场地</th><th>日期</th><th>时段</th><th>用途</th><th>状态</th><th>操作</th></tr></thead><tbody id="myBookingList"></tbody></table></div>
+        <div class="table-wrap"><table><thead><tr><th>场地</th><th>日期</th><th>时段</th><th>用途</th><th>状态</th><th>操作</th></tr></thead><tbody id="myBookingList"><tr><td colspan="6" class="loading">加载中...</td></tr></tbody></table></div>
       </div>
     </div>
   </div>
@@ -268,16 +271,16 @@ tbody tr:hover { background: #f8fafc; }
     <div class="container">
       <div class="card">
         <h2 class="card-title">⏳ 待审核预约</h2>
-        <div class="table-wrap"><table><thead><tr><th>申请人</th><th>类型</th><th>场地</th><th>日期</th><th>时段</th><th>用途</th><th>操作</th></tr></thead><tbody id="pendingList"></tbody></table></div>
+        <div class="table-wrap"><table><thead><tr><th>申请人</th><th>类型</th><th>场地</th><th>日期</th><th>时段</th><th>用途</th><th>操作</th></tr></thead><tbody id="pendingList"><tr><td colspan="7" class="loading">加载中...</td></tr></tbody></table></div>
       </div>
       <div class="card">
         <h2 class="card-title">📋 所有预约记录</h2>
-        <div class="table-wrap"><table><thead><tr><th>申请人</th><th>类型</th><th>场地</th><th>日期</th><th>时段</th><th>状态</th></tr></thead><tbody id="allBookingList"></tbody></table></div>
+        <div class="table-wrap"><table><thead><tr><th>申请人</th><th>类型</th><th>场地</th><th>日期</th><th>时段</th><th>状态</th></tr></thead><tbody id="allBookingList"><tr><td colspan="6" class="loading">加载中...</td></tr></tbody></table></div>
       </div>
       <div class="card">
         <h2 class="card-title">🏢 场地管理</h2>
         <button class="btn btn-primary btn-sm" onclick="showAddVenueModal()" style="margin-bottom:1rem;">+ 添加场地</button>
-        <div class="table-wrap"><table><thead><tr><th>场地</th><th>类型</th><th>位置</th><th>状态</th><th>操作</th></tr></thead><tbody id="venueManageList"></tbody></table></div>
+        <div class="table-wrap"><table><thead><tr><th>场地</th><th>类型</th><th>位置</th><th>状态</th><th>操作</th></tr></thead><tbody id="venueManageList"><tr><td colspan="5" class="loading">加载中...</td></tr></tbody></table></div>
       </div>
     </div>
   </div>
@@ -293,7 +296,7 @@ tbody tr:hover { background: #f8fafc; }
         <div class="form-group"><label>类型</label><input type="text" id="bookUserType" readonly></div>
         <div class="form-group"><label>账号</label><input type="text" id="bookAccount" readonly></div>
       </div>
-      <div class="form-group"><label>场地</label><select id="bookVenue" required></select></div>
+      <div class="form-group"><label>场地</label><select id="bookVenue" required><option value="">请选择场地</option></select></div>
       <div class="form-row">
         <div class="form-group"><label>日期</label><input type="date" id="bookDate" required></div>
         <div class="form-group"><label>时段</label><select id="bookTime" required><option value="">请选择</option><option value="08:00-10:00">08:00-10:00</option><option value="10:00-12:00">10:00-12:00</option><option value="14:00-16:00">14:00-16:00</option><option value="16:00-18:00">16:00-18:00</option><option value="18:00-20:00">18:00-20:00</option></select></div>
@@ -323,17 +326,56 @@ tbody tr:hover { background: #f8fafc; }
 <div id="toast" class="toast"></div>
 
 <script>
-// ========== Data ==========
+// ========== Supabase Config ==========
+const SUPABASE_URL = 'https://dmebzodstgyjvcxmzvut.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRtZWJ6b2RzdGd5anZjeG16enV0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE2OTM2MTYsImV4cCI6MjA1NzI2OTYxNn0.xbO6sCkBvsK1OH8pADW3mGd9_rB9R6pMLWOT4voB7Gk';
+
+// Simple fetch wrapper for Supabase REST API
+async function supabaseRequest(table, options = {}) {
+  const { method = 'GET', body = null, params = {} } = options;
+  const url = new URL(`${SUPABASE_URL}/rest/v1/${table}`);
+  Object.keys(params).forEach(k => url.searchParams.append(k, params[k]));
+  
+  const headers = {
+    'apikey': SUPABASE_KEY,
+    'Authorization': `Bearer ${SUPABASE_KEY}`,
+    'Content-Type': 'application/json',
+    'Prefer': 'return=representation'
+  };
+  if (options.single) headers['Prefer'] = 'return=representation';
+  
+  const config = { method, headers };
+  if (body) config.body = JSON.stringify(body);
+  if (Object.keys(params).length) config.url = url.toString();
+  
+  // Use proxy to avoid CORS - append to existing URL
+  const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(config.url || url.toString())}`;
+  const proxyConfig = { ...config, url: proxyUrl };
+  
+  try {
+    const res = await fetch(proxyConfig.url, {
+      method: config.method,
+      headers: config.headers
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || '请求失败');
+    return { data, error: null };
+  } catch (err) {
+    // Fallback: try direct
+    try {
+      const res = await fetch(url.toString(), { method, headers, body });
+      const data = await res.json();
+      return { data, error: res.ok ? null : data };
+    } catch {
+      return { data: null, error: err.message };
+    }
+  }
+}
+
+// ========== Data State ==========
 let currentUser = null;
 let isAdmin = false;
-let venues = [
-  {id:1,name:'体育馆羽毛球场',type:'体育馆',icon:'🏸',location:'体育馆1层',capacity:4,time:'08:00-22:00',status:'open'},
-  {id:2,name:'体育馆篮球场',type:'体育馆',icon:'🏀',location:'体育馆2层',capacity:20,time:'08:00-22:00',status:'open'},
-  {id:3,name:'会议室A101',type:'会议室',icon:'🏢',location:'综合楼A101',capacity:30,time:'08:00-18:00',status:'open'},
-  {id:4,name:'教室201',type:'教室',icon:'🏫',location:'教学楼2层',capacity:50,time:'08:00-20:00',status:'open'},
-  {id:5,name:'体育馆乒乓球场',type:'体育馆',icon:'🏓',location:'体育馆B1层',capacity:6,time:'08:00-22:00',status:'busy'},
-  {id:6,name:'会议室B202',type:'会议室',icon:'🏢',location:'综合楼B202',capacity:20,time:'08:00-18:00',status:'open'}
-];
+let venues = [];
 let bookings = [];
 
 // ========== Init ==========
@@ -343,11 +385,15 @@ function init() {
   if (savedAdmin) { isAdmin = true; showMainPage(); return; }
   if (savedUser) { currentUser = JSON.parse(savedUser); showMainPage(); return; }
   showAuth();
+  loadVenuesToSelect();
 }
 document.addEventListener('DOMContentLoaded', init);
 
 // ========== Auth ==========
-function showAuth() { document.getElementById('authPage').style.display = 'flex'; document.getElementById('mainPage').style.display = 'none'; }
+function showAuth() { 
+  document.getElementById('authPage').style.display = 'flex'; 
+  document.getElementById('mainPage').style.display = 'none'; 
+}
 function showMainPage() {
   document.getElementById('authPage').style.display = 'none';
   document.getElementById('mainPage').style.display = 'block';
@@ -376,18 +422,39 @@ function switchAuthTab(tab) {
   else if (tab === 'register') { document.getElementById('registerForm').style.display = 'block'; }
   else if (tab === 'admin-login') { document.getElementById('adminLoginForm').style.display = 'block'; }
 }
-function doLogin() {
+
+async function doLogin() {
   const type = document.getElementById('loginUserType').value;
   const account = document.getElementById('loginAccount').value.trim();
   const password = document.getElementById('loginPassword').value;
   if (!account || !password) { showToast('请填写完整信息', 'error'); return; }
-  // 模拟登录
-  currentUser = { account, name: account === 'admin' ? '管理员' : (type === 'student' ? '学生' : '教师') + account.slice(-4), type, phone: '138****8888' };
+  
+  const { data, error } = await supabaseRequest('users', { 
+    params: { account: `eq.${account}`, select: '*' } 
+  });
+  
+  if (error || !data || data.length === 0) {
+    showToast('账号或密码错误', 'error'); return;
+  }
+  
+  const user = data[0];
+  if (user.user_type !== type) {
+    showToast('身份选择错误', 'error'); return;
+  }
+  
+  currentUser = { 
+    id: user.id, 
+    account: user.account, 
+    name: user.name, 
+    type: user.user_type, 
+    phone: user.phone 
+  };
   localStorage.setItem('campusUser', JSON.stringify(currentUser));
   showToast('登录成功', 'success');
   showMainPage();
 }
-function doRegister() {
+
+async function doRegister() {
   const type = document.getElementById('regUserType').value;
   const account = document.getElementById('regAccount').value.trim();
   const name = document.getElementById('regName').value.trim();
@@ -395,12 +462,23 @@ function doRegister() {
   const password = document.getElementById('regPassword').value;
   if (!account || !name || !phone || !password) { showToast('请填写完整信息', 'error'); return; }
   if (!/^1\d{10}$/.test(phone)) { showToast('手机号格式不正确', 'error'); return; }
-  currentUser = { account, name, type, phone };
-  localStorage.setItem('campusUser', JSON.stringify(currentUser));
+  
+  // Check if account exists
+  const { data } = await supabaseRequest('users', { params: { account: `eq.${account}`, select: 'id' } });
+  if (data && data.length > 0) { showToast('账号已存在', 'error'); return; }
+  
+  const { error } = await supabaseRequest('users', {
+    method: 'POST',
+    body: { account, name, user_type: type, phone }
+  });
+  
+  if (error) { showToast('注册失败: ' + error, 'error'); return; }
+  
   showToast('注册成功', 'success');
-  showMainPage();
+  switchAuthTab('login');
 }
-function doAdminLogin() {
+
+async function doAdminLogin() {
   const account = document.getElementById('adminAccount').value.trim();
   const password = document.getElementById('adminPassword').value;
   if (account === 'admin' && password === 'admin123') {
@@ -425,58 +503,94 @@ function showPage(pageId) {
 }
 
 // ========== Venues ==========
-function loadVenues() {
+async function loadVenues() {
   const typeFilter = document.getElementById('filterType')?.value || '';
-  let filtered = venues;
-  if (typeFilter) filtered = venues.filter(v => v.type === typeFilter);
   
-  const html = filtered.map(v => `
+  let params = { select: '*', order: 'created_at' };
+  if (typeFilter) params.type = `eq.${typeFilter}`;
+  
+  const { data, error } = await supabaseRequest('venues', { params });
+  
+  if (error) { 
+    document.getElementById('venueList').innerHTML = '<div class="empty-state"><div class="icon">❌</div><p>加载失败</p></div>';
+    return; 
+  }
+  
+  venues = data || [];
+  
+  const html = venues.length ? venues.map(v => `
     <div class="venue-card">
       <div class="venue-img ${v.type === '体育馆' ? 'blue' : v.type === '会议室' ? 'orange' : 'green'}">
-        ${v.icon}
-        <span class="venue-badge ${v.status}">${v.status === 'open' ? '可预约' : '已满'}</span>
+        ${v.icon || '🏢'}
+        <span class="venue-badge ${v.status === 'open' ? 'open' : 'busy'}">${v.status === 'open' ? '可预约' : '已满'}</span>
       </div>
       <div class="venue-body">
         <div class="venue-name">${v.name}</div>
-        <div class="venue-info">📍 ${v.location}</div>
-        <div class="venue-info">👥 容纳${v.capacity}人</div>
-        <div class="venue-info">⏰ ${v.time}</div>
+        <div class="venue-info">📍 ${v.location || '-'}</div>
+        <div class="venue-info">👥 容纳${v.capacity || 0}人</div>
+        <div class="venue-info">⏰ ${v.open_time || '-'}</div>
         <div class="venue-tags">
           <span class="tag">${v.type}</span>
           ${v.status === 'open' ? '<span class="tag green">可预约</span>' : '<span class="tag orange">已满</span>'}
         </div>
       </div>
       <div class="venue-footer">
-        ${!isAdmin && v.status === 'open' ? `<button class="btn btn-primary btn-sm" onclick="openBookingModal('${v.name}')">立即预约</button>` : ''}
+        ${!isAdmin && v.status === 'open' ? `<button class="btn btn-primary btn-sm" onclick="openBookingModal('${v.id}', '${v.name}')">立即预约</button>` : ''}
       </div>
-    </div>`).join('');
-  document.getElementById('venueList').innerHTML = html || '<div class="empty-state"><div class="icon">📭</div><p>暂无场地</p></div>';
-  document.getElementById('homeVenues').innerHTML = html;
+    </div>`).join('') : '<div class="empty-state"><div class="icon">📭</div><p>暂无场地</p></div>';
   
-  // 填充预约表单场地选项
+  document.getElementById('venueList').innerHTML = html;
+  document.getElementById('homeVenues').innerHTML = venues.length ? html : '<div class="empty-state"><div class="icon">📭</div><p>暂无场地</p></div>';
+  
+  // Populate venue select in booking modal
   const select = document.getElementById('bookVenue');
   if (select) {
-    select.innerHTML = '<option value="">请选择场地</option>' + venues.filter(v => v.status === 'open').map(v => `<option value="${v.name}">${v.icon} ${v.name}</option>`).join('');
+    select.innerHTML = '<option value="">请选择场地</option>' + 
+      venues.filter(v => v.status === 'open').map(v => `<option value="${v.id}|${v.name}">${v.icon || '🏢'} ${v.name}</option>`).join('');
   }
 }
 
+async function loadVenuesToSelect() {
+  const { data } = await supabaseRequest('venues', { params: { select: 'id,name,icon,status' } });
+  venues = data || [];
+}
+
 // ========== Bookings ==========
-function openBookingModal(venueName) {
-  document.getElementById('bookVenue').value = venueName;
+function openBookingModal(venueId, venueName) {
+  document.getElementById('bookVenue').value = venueId + '|' + venueName;
   document.getElementById('bookingModal').classList.add('show');
 }
-function submitBooking() {
-  const venue = document.getElementById('bookVenue').value;
+
+async function submitBooking() {
+  const venueValue = document.getElementById('bookVenue').value;
   const date = document.getElementById('bookDate').value;
   const time = document.getElementById('bookTime').value;
   const purpose = document.getElementById('bookPurpose').value.trim();
-  if (!venue || !date || !time || !purpose) { showToast('请填写完整信息', 'error'); return; }
+  
+  if (!venueValue || !date || !time || !purpose) { showToast('请填写完整信息', 'error'); return; }
+  
+  const [venueId, venueName] = venueValue.split('|');
   const today = new Date().toISOString().split('T')[0];
   if (date < today) { showToast('不能预约过去的日期', 'error'); return; }
   
-  const booking = { id: Date.now(), venue, date, time, purpose, status: 'pending', user: currentUser.name, userType: currentUser.type === 'student' ? '学生' : '教师', account: currentUser.account };
-  bookings.push(booking);
-  localStorage.setItem('campusBookings', JSON.stringify(bookings));
+  const { error } = await supabaseRequest('bookings', {
+    method: 'POST',
+    body: {
+      venue_id: venueId,
+      venue_name: venueName,
+      user_id: currentUser.id,
+      user_account: currentUser.account,
+      user_name: currentUser.name,
+      user_type: currentUser.type === 'student' ? '学生' : '教师',
+      book_date: date,
+      book_time: time,
+      purpose,
+      status: 'pending'
+    }
+  });
+  
+  if (error) { showToast('预约失败: ' + error, 'error'); return; }
+  
   showToast('预约成功，请等待审核', 'success');
   closeModal('bookingModal');
   document.getElementById('bookDate').value = '';
@@ -484,67 +598,117 @@ function submitBooking() {
   document.getElementById('bookPurpose').value = '';
   loadMyBookings();
 }
-function loadMyBookings() {
+
+async function loadMyBookings() {
   const filter = document.getElementById('myBookingFilter')?.value || '';
-  let filtered = bookings.filter(b => b.account === currentUser.account);
-  if (filter) filtered = filtered.filter(b => b.status === filter);
+  let params = { select: '*', order: 'created_at.desc' };
   
-  const statusMap = { pending: ['待审核', 'pending'], approved: ['已通过', 'approved'], rejected: ['已拒绝', 'rejected'], completed: ['已完成', 'completed'] };
-  document.getElementById('myBookingList').innerHTML = filtered.length ? filtered.map(b => {
+  if (filter) params.status = `eq.${filter}`;
+  
+  const { data, error } = await supabaseRequest('bookings', { params });
+  
+  if (error) { 
+    document.getElementById('myBookingList').innerHTML = '<tr><td colspan="6" style="text-align:center;color:#999;">加载失败</td></tr>';
+    return; 
+  }
+  
+  const myBookings = (data || []).filter(b => b.user_account === currentUser.account);
+  const statusMap = { pending: ['待审核', 'pending'], approved: ['已通过', 'approved'], rejected: ['已拒绝', 'rejected'], cancelled: ['已取消', 'cancelled'] };
+  
+  document.getElementById('myBookingList').innerHTML = myBookings.length ? myBookings.map(b => {
     const [text, cls] = statusMap[b.status] || [b.status, ''];
-    return `<tr><td>${b.venue}</td><td>${b.date}</td><td>${b.time}</td><td>${b.purpose}</td><td><span class="status ${cls}">${text}</span></td><td>${b.status === 'pending' ? `<button class="btn btn-danger btn-xs" onclick="cancelBooking(${b.id})">取消</button>` : '-'}</td></tr>`;
+    return `<tr><td>${b.venue_name}</td><td>${b.book_date}</td><td>${b.book_time}</td><td>${b.purpose}</td><td><span class="status ${cls}">${text}</span></td><td>${b.status === 'pending' ? `<button class="btn btn-danger btn-xs" onclick="cancelBooking('${b.id}')">取消</button>` : '-'}</td></tr>`;
   }).join('') : '<tr><td colspan="6" style="text-align:center;color:#999;padding:2rem;">暂无预约记录</td></tr>';
 }
-function cancelBooking(id) {
+
+async function cancelBooking(id) {
   if (!confirm('确定取消吗？')) return;
-  bookings = bookings.filter(b => b.id !== id);
-  localStorage.setItem('campusBookings', JSON.stringify(bookings));
+  const { error } = await supabaseRequest(`bookings?id=eq.${id}`, { 
+    method: 'PATCH', 
+    body: { status: 'cancelled' } 
+  });
+  if (error) { showToast('取消失败', 'error'); return; }
   showToast('已取消', 'success');
   loadMyBookings();
 }
 
 // ========== Stats ==========
-function updateStats() {
-  const myBookings = bookings.filter(b => b.account === currentUser.account);
+async function updateStats() {
+  const { data: allBookings } = await supabaseRequest('bookings', { params: { select: 'status' } });
+  const myBookings = (allBookings || []).filter(b => b.user_account === currentUser.account);
+  const { data: openVenues } = await supabaseRequest('venues', { params: { status: 'eq.open', select: 'id' } });
+  
   document.getElementById('statTotal').textContent = myBookings.length;
   document.getElementById('statPending').textContent = myBookings.filter(b => b.status === 'pending').length;
   document.getElementById('statApproved').textContent = myBookings.filter(b => b.status === 'approved').length;
-  document.getElementById('statVenues').textContent = venues.filter(v => v.status === 'open').length;
+  document.getElementById('statVenues').textContent = (openVenues || []).length;
 }
 
 // ========== Admin ==========
-function loadAdminData() {
-  // 待审核
-  const pending = bookings.filter(b => b.status === 'pending');
-  document.getElementById('pendingList').innerHTML = pending.length ? pending.map(b => `<tr><td>${b.user}</td><td>${b.userType}</td><td>${b.venue}</td><td>${b.date}</td><td>${b.time}</td><td>${b.purpose}</td><td><button class="btn btn-success btn-xs" onclick="approveBooking(${b.id})">通过</button><button class="btn btn-danger btn-xs" onclick="rejectBooking(${b.id})" style="margin-left:5px;">拒绝</button></td></tr>`).join('') : '<tr><td colspan="7" style="text-align:center;color:#999;">暂无待审核</td></tr>';
-  // 所有记录
-  const statusMap = { pending: ['待审核', 'pending'], approved: ['已通过', 'approved'], rejected: ['已拒绝', 'rejected'] };
-  document.getElementById('allBookingList').innerHTML = bookings.length ? bookings.map(b => { const [text, cls] = statusMap[b.status] || [b.status, '']; return `<tr><td>${b.user}</td><td>${b.userType}</td><td>${b.venue}</td><td>${b.date}</td><td>${b.time}</td><td><span class="status ${cls}">${text}</span></td></tr>`; }).join('') : '<tr><td colspan="6" style="text-align:center;color:#999;">暂无记录</td></tr>';
-  // 场地管理
-  document.getElementById('venueManageList').innerHTML = venues.map(v => `<tr><td>${v.icon} ${v.name}</td><td>${v.type}</td><td>${v.location}</td><td><span class="status ${v.status === 'open' ? 'approved' : 'rejected'}">${v.status === 'open' ? '启用' : '停用'}</span></td><td><button class="btn btn-xs ${v.status === 'open' ? 'btn-danger' : 'btn-success'}" onclick="toggleVenue(${v.id})">${v.status === 'open' ? '停用' : '启用'}</button></td></tr>`).join('');
+async function loadAdminData() {
+  // Load pending
+  const { data: pending } = await supabaseRequest('bookings', { 
+    params: { status: 'eq.pending', select: '*', order: 'created_at.desc' } 
+  });
+  document.getElementById('pendingList').innerHTML = (pending && pending.length) ? pending.map(b => 
+    `<tr><td>${b.user_name}</td><td>${b.user_type}</td><td>${b.venue_name}</td><td>${b.book_date}</td><td>${b.book_time}</td><td>${b.purpose}</td><td><button class="btn btn-success btn-xs" onclick="approveBooking('${b.id}')">通过</button><button class="btn btn-danger btn-xs" onclick="rejectBooking('${b.id}')" style="margin-left:5px;">拒绝</button></td></tr>`
+  ).join('') : '<tr><td colspan="7" style="text-align:center;color:#999;">暂无待审核</td></tr>';
+  
+  // Load all bookings
+  const { data: allBookings } = await supabaseRequest('bookings', { params: { order: 'created_at.desc' } });
+  const statusMap = { pending: ['待审核', 'pending'], approved: ['已通过', 'approved'], rejected: ['已拒绝', 'rejected'], cancelled: ['已取消', 'cancelled'] };
+  document.getElementById('allBookingList').innerHTML = (allBooks && allBooks.length) ? allBooks.map(b => { 
+    const [text, cls] = statusMap[b.status] || [b.status, '']; 
+    return `<tr><td>${b.user_name}</td><td>${b.user_type}</td><td>${b.venue_name}</td><td>${b.book_date}</td><td>${b.book_time}</td><td><span class="status ${cls}">${text}</span></td></tr>`; 
+  }).join('') : '<tr><td colspan="6" style="text-align:center;color:#999;">暂无记录</td></tr>';
+  
+  // Load venues
+  const { data: venueList } = await supabaseRequest('venues', { params: { order: 'created_at.desc' } });
+  document.getElementById('venueManageList').innerHTML = (venueList && venueList.length) ? venueList.map(v => 
+    `<tr><td>${v.icon || '🏢'} ${v.name}</td><td>${v.type}</td><td>${v.location || '-'}</td><td><span class="status ${v.status === 'open' ? 'approved' : 'rejected'}">${v.status === 'open' ? '启用' : '停用'}</span></td><td><button class="btn btn-xs ${v.status === 'open' ? 'btn-danger' : 'btn-success'}" onclick="toggleVenue('${v.id}', '${v.status}')">${v.status === 'open' ? '停用' : '启用'}</button></td></tr>`
+  ).join('') : '<tr><td colspan="5" style="text-align:center;color:#999;">暂无场地</td></tr>';
 }
-function approveBooking(id) {
-  const b = bookings.find(b => b.id === id);
-  if (b) { b.status = 'approved'; localStorage.setItem('campusBookings', JSON.stringify(bookings)); showToast('已通过', 'success'); loadAdminData(); }
+
+async function approveBooking(id) {
+  const { error } = await supabaseRequest(`bookings?id=eq.${id}`, { method: 'PATCH', body: { status: 'approved' } });
+  if (error) { showToast('操作失败', 'error'); return; }
+  showToast('已通过', 'success');
+  loadAdminData();
 }
-function rejectBooking(id) {
-  const b = bookings.find(b => b.id === id);
-  if (b) { b.status = 'rejected'; localStorage.setItem('campusBookings', JSON.stringify(bookings)); showToast('已拒绝', 'success'); loadAdminData(); }
+
+async function rejectBooking(id) {
+  const { error } = await supabaseRequest(`bookings?id=eq.${id}`, { method: 'PATCH', body: { status: 'rejected' } });
+  if (error) { showToast('操作失败', 'error'); return; }
+  showToast('已拒绝', 'success');
+  loadAdminData();
 }
-function toggleVenue(id) {
-  const v = venues.find(v => v.id === id);
-  if (v) { v.status = v.status === 'open' ? 'busy' : 'open'; showToast('已更新', 'success'); loadAdminData(); loadVenues(); }
+
+async function toggleVenue(id, currentStatus) {
+  const newStatus = currentStatus === 'open' ? 'busy' : 'open';
+  const { error } = await supabaseRequest(`venues?id=eq.${id}`, { method: 'PATCH', body: { status: newStatus } });
+  if (error) { showToast('操作失败', 'error'); return; }
+  showToast('已更新', 'success');
+  loadAdminData();
+  loadVenues();
 }
-function showAddVenueModal() { document.getElementById('addVenueModal').classList.add('show'); }
-function submitAddVenue() {
+
+async function showAddVenueModal() { document.getElementById('addVenueModal').classList.add('show'); }
+
+async function submitAddVenue() {
   const name = document.getElementById('addVenueName').value.trim();
   const type = document.getElementById('addVenueType').value;
   const location = document.getElementById('addVenueLocation').value.trim();
   const capacity = document.getElementById('addVenueCapacity').value;
   const time = document.getElementById('addVenueTime').value;
   if (!name || !type || !location) { showToast('请填写完整信息', 'error'); return; }
+  
   const icons = { '体育馆': '🏃', '教室': '🏫', '会议室': '🏢' };
-  venues.push({ id: Date.now(), name, type, icon: icons[type] || '🏢', location, capacity: capacity || 0, time: time || '08:00-22:00', status: 'open' });
+  const { error } = await supabaseRequest('venues', {
+    method: 'POST',
+    body: { name, type, icon: icons[type] || '🏢', location, capacity: capacity || 0, open_time: time || '08:00-22:00', status: 'open' }
+  });
+  
+  if (error) { showToast('添加失败', 'error'); return; }
   showToast('添加成功', 'success');
   closeModal('addVenueModal');
   document.getElementById('addVenueName').value = '';
