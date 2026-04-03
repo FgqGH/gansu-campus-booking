@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>甘肃中医药大学 - 校园场地预约系统</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --primary: #1a5fb4;
+  --primary-light: #3584e4;
+  --primary-dark: #0d47a1;
+  --secondary: #e8f4fd;
+  --accent: #26a69a;
+  --danger: #e53935;
+  --success: #43a047;
+  --warning: #fb8c00;
+  --text: #1a1a2e;
+  --text-light: #6b7280;
+  --white: #ffffff;
+  --bg: #f0f4f8;
+  --border: #d0d7de;
+  --shadow: 0 2px 12px rgba(26, 95, 180, 0.1);
+  --radius: 12px;
+}
+body { font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+/* Header */
+.header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: var(--white); padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 16px rgba(26, 95, 180, 0.25); }
+.header-brand { display: flex; align-items: center; gap: 12px; font-size: 1.1rem; font-weight: 600; }
+.header-brand .logo { width: 36px; height: 36px; background: rgba(255,255,255,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+.header-nav { display: flex; align-items: center; gap: 4px; }
+.header-nav a { color: rgba(255,255,255,0.85); text-decoration: none; padding: 6px 14px; border-radius: 6px; font-size: 0.88rem; cursor: pointer; transition: all 0.2s; }
+.header-nav a:hover, .header-nav a.active { background: rgba(255,255,255,0.2); color: var(--white); }
+.header-user { display: flex; align-items: center; gap: 12px; }
+.user-info { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; }
+.user-avatar { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
+.btn { padding: 8px 20px; border: none; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; font-family: inherit; }
+.btn-primary { background: var(--primary); color: var(--white); }
+.btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+.btn-outline { background: transparent; border: 1.5px solid var(--primary); color: var(--primary); }
+.btn-outline:hover { background: var(--primary); color: var(--white); }
+.btn-danger { background: var(--danger); color: var(--white); }
+.btn-danger:hover { background: #c62828; }
+.btn-success { background: var(--success); color: var(--white); }
+.btn-warning { background: var(--warning); color: var(--white); }
+.btn-sm { padding: 5px 14px; font-size: 0.82rem; }
+.btn-xs { padding: 3px 10px; font-size: 0.78rem; }
+
+/* Container */
+.container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+/* Cards */
+.card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.5rem; margin-bottom: 1.5rem; }
+.card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; gap: 8px; color: var(--primary); }
+
+/* Auth Container */
+.auth-container { min-height: calc(100vh - 64px); display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--primary) 0%, #0a369d 100%); }
+.auth-box { background: var(--white); border-radius: var(--radius); box-shadow: 0 8px 40px rgba(0,0,0,0.2); padding: 2.5rem; width: 100%; max-width: 420px; }
+.auth-title { text-align: center; margin-bottom: 2rem; }
+.auth-title h2 { font-size: 1.4rem; color: var(--primary); margin-bottom: 0.5rem; }
+.auth-title p { color: var(--text-light); font-size: 0.88rem; }
+.form-group { margin-bottom: 1.2rem; }
+.form-group label { display: block; margin-bottom: 6px; font-weight: 500; font-size: 0.88rem; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.9rem; font-family: inherit; transition: border-color 0.2s; outline: none; }
+.form-group input:focus, .form-group select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26, 95, 180, 0.1); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.auth-switch { text-align: center; margin-top: 1.5rem; font-size: 0.88rem; color: var(--text-light); }
+.auth-switch a { color: var(--primary); cursor: pointer; text-decoration: none; font-weight: 500; }
+
+/* Page views */
+.page { display: none; }
+.page.active { display: block; }
+
+/* Stats */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.stat-card { background: var(--white); border-radius: var(--radius); padding: 1.2rem 1.4rem; box-shadow: var(--shadow); display: flex; align-items: center; gap: 1rem; }
+.stat-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+.stat-icon.blue { background: var(--secondary); color: var(--primary); }
+.stat-icon.green { background: #e8f5e9; color: var(--success); }
+.stat-icon.orange { background: #fff3e0; color: var(--warning); }
+.stat-icon.red { background: #ffebee; color: var(--danger); }
+.stat-value { font-size: 1.5rem; font-weight: 700; }
+.stat-label { font-size: 0.8rem; color: var(--text-light); }
+
+/* Filter bar */
+.filter-bar { background: var(--white); border-radius: var(--radius); padding: 1rem 1.4rem; margin-bottom: 1.5rem; box-shadow: var(--shadow); display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.filter-bar input, .filter-bar select { padding: 8px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.85rem; font-family: inherit; outline: none; }
+.filter-bar input:focus, .filter-bar select:focus { border-color: var(--primary); }
+
+/* Venue Grid */
+.venue-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
+.venue-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s; }
+.venue-card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(26, 95, 180, 0.15); }
+.venue-img { height: 150px; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--white); position: relative; }
+.venue-img.blue { background: linear-gradient(135deg, var(--primary-light), var(--primary)); }
+.venue-img.orange { background: linear-gradient(135deg, #ff9800, #f57c00); }
+.venue-img.green { background: linear-gradient(135deg, #26a69a, #00897b); }
+.venue-img.purple { background: linear-gradient(135deg, #7e57c2, #5e35b1); }
+.venue-badge { position: absolute; top: 10px; right: 10px; padding: 3px 10px; border-radius: 20px; font-size: 0.72rem; color: var(--white); font-weight: 500; }
+.venue-badge.open { background: rgba(67, 160, 71, 0.85); }
+.venue-badge.busy { background: rgba(229, 57, 53, 0.85); }
+.venue-body { padding: 1rem 1.2rem; }
+.venue-name { font-size: 0.98rem; font-weight: 600; margin-bottom: 6px; }
+.venue-info { font-size: 0.8rem; color: var(--text-light); margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
+.venue-tags { display: flex; gap: 5px; margin-top: 8px; flex-wrap: wrap; }
+.tag { padding: 2px 10px; border-radius: 20px; font-size: 0.72rem; background: var(--secondary); color: var(--primary); }
+.tag.green { background: #e8f5e9; color: var(--success); }
+.tag.orange { background: #fff3e0; color: var(--warning); }
+.venue-footer { padding: 0.75rem 1.2rem; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; }
+
+/* Table */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+thead th { background: var(--secondary); padding: 10px 12px; text-align: left; font-weight: 600; color: var(--primary-dark); white-space: nowrap; }
+tbody td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+tbody tr:hover { background: #f8fafc; }
+.status { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 500; }
+.status.pending { background: #fff3e0; color: var(--warning); }
+.status.approved { background: #e8f5e9; color: var(--success); }
+.status.rejected { background: #ffebee; color: var(--danger); }
+.status.completed { background: var(--secondary); color: var(--primary); }
+
+/* Modal */
+.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 200; padding: 1rem; }
+.modal-overlay.show { display: flex; }
+.modal { background: var(--white); border-radius: var(--radius); width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+.modal-header { padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-weight: 600; font-size: 1rem; }
+.modal-close { width: 28px; height: 28px; border-radius: 50%; border: none; background: #f0f0f0; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.modal-close:hover { background: #e0e0e0; }
+.modal-body { padding: 1.5rem; }
+.modal-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
+
+/* Tabs */
+.tabs { display: flex; gap: 4px; border-bottom: 2px solid var(--border); margin-bottom: 1.5rem; }
+.tab { padding: 10px 18px; cursor: pointer; border: none; background: transparent; font-size: 0.9rem; font-family: inherit; color: var(--text-light); border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
+.tab:hover { color: var(--primary); }
+.tab.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 600; }
+
+/* Toast */
+.toast { position: fixed; top: 80px; right: 20px; background: var(--white); border-radius: var(--radius); padding: 12px 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 300; display: none; align-items: center; gap: 10px; font-size: 0.88rem; max-width: 300px; border-left: 4px solid var(--primary); }
+.toast.show { display: flex; }
+.toast.success { border-left-color: var(--success); }
+.toast.error { border-left-color: var(--danger); }
+.toast.warning { border-left-color: var(--warning); }
+
+/* Empty state */
+.empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-light); }
+.empty-state .icon { font-size: 3rem; margin-bottom: 1rem; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header { padding: 0 1rem; }
+  .header-nav { display: none; }
+  .container { padding: 1rem; }
+  .venue-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-brand">
+    <div class="logo">🏫</div>
+    <span>甘肃中医药大学 - 场地预约系统</span>
+  </div>
+  <nav class="header-nav">
+    <a class="active" onclick="showPage('home')">首页</a>
+    <a onclick="showPage('venues')">场地列表</a>
+    <a onclick="showPage('my-bookings')">我的预约</a>
+    <a onclick="showPage('admin')" id="adminNavLink" style="display:none;">管理后台</a>
+  </nav>
+  <div class="header-user">
+    <span id="navUserName"></span>
+    <button class="btn btn-sm" style="background:rgba(255,255,255,0.2);color:white;" onclick="logout()">退出</button>
+  </div>
+</div>
+
+<!-- Auth Page -->
+<div id="authPage" class="auth-container">
+  <div class="auth-box">
+    <div class="auth-title">
+      <h2>🏫 校园场地预约</h2>
+      <p>甘肃中医药大学官方平台</p>
+    </div>
+    <div class="tabs" style="margin-bottom:1.5rem;">
+      <button class="tab active" onclick="switchAuthTab('login')">用户登录</button>
+      <button class="tab" onclick="switchAuthTab('admin-login')">管理员登录</button>
+    </div>
+    
+    <!-- User Login -->
+    <div id="loginForm">
+      <div class="form-group"><label>身份</label><select id="loginUserType"><option value="student">学生</option><option value="teacher">教师</option></select></div>
+      <div class="form-group"><label>学号/工号</label><input type="text" id="loginAccount" placeholder="请输入学号或工号"></div>
+      <div class="form-group"><label>密码</label><input type="password" id="loginPassword" placeholder="请输入密码"></div>
+      <button class="btn btn-primary" style="width:100%;padding:12px;" onclick="doLogin()">登 录</button>
+      <div class="auth-switch">还没有账号？<a onclick="switchAuthTab('register')">立即注册</a></div>
+    </div>
+    
+    <!-- User Register -->
+    <div id="registerForm" style="display:none;">
+      <div class="form-group"><label>身份</label><select id="regUserType"><option value="student">学生</option><option value="teacher">教师</option></select></div>
+      <div class="form-group"><label>学号/工号</label><input type="text" id="regAccount" placeholder="请输入学号或工号"></div>
+      <div class="form-group"><label>姓名</label><input type="text" id="regName" placeholder="请输入真实姓名"></div>
+      <div class="form-group"><label>手机号</label><input type="tel" id="regPhone" placeholder="请输入手机号"></div>
+      <div class="form-group"><label>密码</label><input type="password" id="regPassword" placeholder="设置密码"></div>
+      <button class="btn btn-primary" style="width:100%;padding:12px;" onclick="doRegister()">注 册</button>
+      <div class="auth-switch">已有账号？<a onclick="switchAuthTab('login')">立即登录</a></div>
+    </div>
+    
+    <!-- Admin Login -->
+    <div id="adminLoginForm" style="display:none;">
+      <div class="form-group"><label>管理员账号</label><input type="text" id="adminAccount" placeholder="请输入管理员账号"></div>
+      <div class="form-group"><label>密码</label><input type="password" id="adminPassword" placeholder="请输入密码"></div>
+      <button class="btn btn-primary" style="width:100%;padding:12px;" onclick="doAdminLogin()">管理员登录</button>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div id="mainPage" style="display:none;">
+  <!-- Home Page -->
+  <div id="homePage" class="page active">
+    <div class="container">
+      <div class="card"><h2 class="card-title">👋 欢迎使用</h2><p style="color:var(--text-light);">您好，<span id="homeUserName"></span>！欢迎使用甘肃中医药大学校园场地预约系统。</p></div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-icon blue">📊</div><div><div class="stat-value" id="statTotal">0</div><div class="stat-label">本周预约</div></div></div>
+        <div class="stat-card"><div class="stat-icon orange">⏳</div><div><div class="stat-value" id="statPending">0</div><div class="stat-label">待审核</div></div></div>
+        <div class="stat-card"><div class="stat-icon green">✅</div><div><div class="stat-value" id="statApproved">0</div><div class="stat-label">已通过</div></div></div>
+        <div class="stat-card"><div class="stat-icon red">🏃</div><div><div class="stat-value" id="statVenues">0</div><div class="stat-label">可用场地</div></div></div>
+      </div>
+      <div class="card"><h2 class="card-title">🔥 热门场地</h2><div class="venue-grid" id="homeVenues"></div></div>
+    </div>
+  </div>
+  
+  <!-- Venues Page -->
+  <div id="venuesPage" class="page">
+    <div class="container">
+      <div class="card">
+        <h2 class="card-title">📋 场地列表</h2>
+        <div class="filter-bar">
+          <select id="filterType" onchange="loadVenues()"><option value="">全部类型</option><option value="体育馆">🏃 体育馆</option><option value="教室">🏫 教室</option><option value="会议室">🏢 会议室</option></select>
+          <input type="date" id="filterDate" onchange="loadVenues()">
+          <button class="btn btn-primary btn-sm" onclick="loadVenues()">筛选</button>
+          <button class="btn btn-outline btn-sm" onclick="document.getElementById('filterType').value='';document.getElementById('filterDate').value='';loadVenues()">重置</button>
+        </div>
+        <div class="venue-grid" id="venueList"></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- My Bookings Page -->
+  <div id="myBookingsPage" class="page">
+    <div class="container">
+      <div class="card">
+        <h2 class="card-title">📜 我的预约</h2>
+        <div style="margin-bottom:1rem;"><select id="myBookingFilter" onchange="loadMyBookings()"><option value="">全部状态</option><option value="pending">待审核</option><option value="approved">已通过</option><option value="rejected">已拒绝</option></select></div>
+        <div class="table-wrap"><table><thead><tr><th>场地</th><th>日期</th><th>时段</th><th>用途</th><th>状态</th><th>操作</th></tr></thead><tbody id="myBookingList"></tbody></table></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Admin Page -->
+  <div id="adminPage" class="page">
+    <div class="container">
+      <div class="card">
+        <h2 class="card-title">⏳ 待审核预约</h2>
+        <div class="table-wrap"><table><thead><tr><th>申请人</th><th>类型</th><th>场地</th><th>日期</th><th>时段</th><th>用途</th><th>操作</th></tr></thead><tbody id="pendingList"></tbody></table></div>
+      </div>
+      <div class="card">
+        <h2 class="card-title">📋 所有预约记录</h2>
+        <div class="table-wrap"><table><thead><tr><th>申请人</th><th>类型</th><th>场地</th><th>日期</th><th>时段</th><th>状态</th></tr></thead><tbody id="allBookingList"></tbody></table></div>
+      </div>
+      <div class="card">
+        <h2 class="card-title">🏢 场地管理</h2>
+        <button class="btn btn-primary btn-sm" onclick="showAddVenueModal()" style="margin-bottom:1rem;">+ 添加场地</button>
+        <div class="table-wrap"><table><thead><tr><th>场地</th><th>类型</th><th>位置</th><th>状态</th><th>操作</th></tr></thead><tbody id="venueManageList"></tbody></table></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Booking Modal -->
+<div id="bookingModal" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">📝 预约场地<button class="modal-close" onclick="closeModal('bookingModal')">×</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>申请人</label><input type="text" id="bookName" readonly></div>
+      <div class="form-row">
+        <div class="form-group"><label>类型</label><input type="text" id="bookUserType" readonly></div>
+        <div class="form-group"><label>账号</label><input type="text" id="bookAccount" readonly></div>
+      </div>
+      <div class="form-group"><label>场地</label><select id="bookVenue" required></select></div>
+      <div class="form-row">
+        <div class="form-group"><label>日期</label><input type="date" id="bookDate" required></div>
+        <div class="form-group"><label>时段</label><select id="bookTime" required><option value="">请选择</option><option value="08:00-10:00">08:00-10:00</option><option value="10:00-12:00">10:00-12:00</option><option value="14:00-16:00">14:00-16:00</option><option value="16:00-18:00">16:00-18:00</option><option value="18:00-20:00">18:00-20:00</option></select></div>
+      </div>
+      <div class="form-group"><label>用途</label><textarea id="bookPurpose" rows="2" placeholder="请输入预约用途" required></textarea></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('bookingModal')">取消</button><button class="btn btn-primary" onclick="submitBooking()">提交预约</button></div>
+  </div>
+</div>
+
+<!-- Add Venue Modal -->
+<div id="addVenueModal" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">➕ 添加场地<button class="modal-close" onclick="closeModal('addVenueModal')">×</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>场地名称</label><input type="text" id="addVenueName" placeholder="如：体育馆羽毛球场地1号"></div>
+      <div class="form-group"><label>类型</label><select id="addVenueType"><option value="体育馆">🏃 体育馆</option><option value="教室">🏫 教室</option><option value="会议室">🏢 会议室</option></select></div>
+      <div class="form-group"><label>位置</label><input type="text" id="addVenueLocation" placeholder="如：综合楼3层"></div>
+      <div class="form-group"><label>容纳人数</label><input type="number" id="addVenueCapacity" placeholder="请输入"></div>
+      <div class="form-group"><label>开放时段</label><input type="text" id="addVenueTime" placeholder="如：08:00-22:00"></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('addVenueModal')">取消</button><button class="btn btn-primary" onclick="submitAddVenue()">添加</button></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<script>
+// ========== Data ==========
+let currentUser = null;
+let isAdmin = false;
+let venues = [
+  {id:1,name:'体育馆羽毛球场',type:'体育馆',icon:'🏸',location:'体育馆1层',capacity:4,time:'08:00-22:00',status:'open'},
+  {id:2,name:'体育馆篮球场',type:'体育馆',icon:'🏀',location:'体育馆2层',capacity:20,time:'08:00-22:00',status:'open'},
+  {id:3,name:'会议室A101',type:'会议室',icon:'🏢',location:'综合楼A101',capacity:30,time:'08:00-18:00',status:'open'},
+  {id:4,name:'教室201',type:'教室',icon:'🏫',location:'教学楼2层',capacity:50,time:'08:00-20:00',status:'open'},
+  {id:5,name:'体育馆乒乓球场',type:'体育馆',icon:'🏓',location:'体育馆B1层',capacity:6,time:'08:00-22:00',status:'busy'},
+  {id:6,name:'会议室B202',type:'会议室',icon:'🏢',location:'综合楼B202',capacity:20,time:'08:00-18:00',status:'open'}
+];
+let bookings = [];
+
+// ========== Init ==========
+function init() {
+  const savedUser = localStorage.getItem('campusUser');
+  const savedAdmin = localStorage.getItem('campusAdmin');
+  if (savedAdmin) { isAdmin = true; showMainPage(); return; }
+  if (savedUser) { currentUser = JSON.parse(savedUser); showMainPage(); return; }
+  showAuth();
+}
+document.addEventListener('DOMContentLoaded', init);
+
+// ========== Auth ==========
+function showAuth() { document.getElementById('authPage').style.display = 'flex'; document.getElementById('mainPage').style.display = 'none'; }
+function showMainPage() {
+  document.getElementById('authPage').style.display = 'none';
+  document.getElementById('mainPage').style.display = 'block';
+  if (isAdmin) {
+    document.getElementById('adminNavLink').style.display = 'block';
+    document.getElementById('navUserName').textContent = '管理员';
+    loadAdminData();
+  } else {
+    document.getElementById('navUserName').textContent = currentUser.name;
+    document.getElementById('homeUserName').textContent = currentUser.name;
+    document.getElementById('bookName').value = currentUser.name;
+    document.getElementById('bookUserType').value = currentUser.type === 'student' ? '学生' : '教师';
+    document.getElementById('bookAccount').value = currentUser.account;
+    updateStats();
+    loadVenues();
+    loadMyBookings();
+  }
+}
+function switchAuthTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('registerForm').style.display = 'none';
+  document.getElementById('adminLoginForm').style.display = 'none';
+  if (tab === 'login') { document.getElementById('loginForm').style.display = 'block'; }
+  else if (tab === 'register') { document.getElementById('registerForm').style.display = 'block'; }
+  else if (tab === 'admin-login') { document.getElementById('adminLoginForm').style.display = 'block'; }
+}
+function doLogin() {
+  const type = document.getElementById('loginUserType').value;
+  const account = document.getElementById('loginAccount').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  if (!account || !password) { showToast('请填写完整信息', 'error'); return; }
+  // 模拟登录
+  currentUser = { account, name: account === 'admin' ? '管理员' : (type === 'student' ? '学生' : '教师') + account.slice(-4), type, phone: '138****8888' };
+  localStorage.setItem('campusUser', JSON.stringify(currentUser));
+  showToast('登录成功', 'success');
+  showMainPage();
+}
+function doRegister() {
+  const type = document.getElementById('regUserType').value;
+  const account = document.getElementById('regAccount').value.trim();
+  const name = document.getElementById('regName').value.trim();
+  const phone = document.getElementById('regPhone').value.trim();
+  const password = document.getElementById('regPassword').value;
+  if (!account || !name || !phone || !password) { showToast('请填写完整信息', 'error'); return; }
+  if (!/^1\d{10}$/.test(phone)) { showToast('手机号格式不正确', 'error'); return; }
+  currentUser = { account, name, type, phone };
+  localStorage.setItem('campusUser', JSON.stringify(currentUser));
+  showToast('注册成功', 'success');
+  showMainPage();
+}
+function doAdminLogin() {
+  const account = document.getElementById('adminAccount').value.trim();
+  const password = document.getElementById('adminPassword').value;
+  if (account === 'admin' && password === 'admin123') {
+    isAdmin = true;
+    localStorage.setItem('campusAdmin', JSON.stringify({ account }));
+    showToast('管理员登录成功', 'success');
+    showMainPage();
+  } else { showToast('账号或密码错误', 'error'); }
+}
+function logout() { localStorage.removeItem('campusUser'); localStorage.removeItem('campusAdmin'); location.reload(); }
+
+// ========== Navigation ==========
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.header-nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById(pageId + 'Page').classList.add('active');
+  event.target.classList.add('active');
+  if (pageId === 'home' && !isAdmin) updateStats();
+  if (pageId === 'venues' && !isAdmin) loadVenues();
+  if (pageId === 'my-bookings' && !isAdmin) loadMyBookings();
+  if (pageId === 'admin' && isAdmin) loadAdminData();
+}
+
+// ========== Venues ==========
+function loadVenues() {
+  const typeFilter = document.getElementById('filterType')?.value || '';
+  let filtered = venues;
+  if (typeFilter) filtered = venues.filter(v => v.type === typeFilter);
+  
+  const html = filtered.map(v => `
+    <div class="venue-card">
+      <div class="venue-img ${v.type === '体育馆' ? 'blue' : v.type === '会议室' ? 'orange' : 'green'}">
+        ${v.icon}
+        <span class="venue-badge ${v.status}">${v.status === 'open' ? '可预约' : '已满'}</span>
+      </div>
+      <div class="venue-body">
+        <div class="venue-name">${v.name}</div>
+        <div class="venue-info">📍 ${v.location}</div>
+        <div class="venue-info">👥 容纳${v.capacity}人</div>
+        <div class="venue-info">⏰ ${v.time}</div>
+        <div class="venue-tags">
+          <span class="tag">${v.type}</span>
+          ${v.status === 'open' ? '<span class="tag green">可预约</span>' : '<span class="tag orange">已满</span>'}
+        </div>
+      </div>
+      <div class="venue-footer">
+        ${!isAdmin && v.status === 'open' ? `<button class="btn btn-primary btn-sm" onclick="openBookingModal('${v.name}')">立即预约</button>` : ''}
+      </div>
+    </div>`).join('');
+  document.getElementById('venueList').innerHTML = html || '<div class="empty-state"><div class="icon">📭</div><p>暂无场地</p></div>';
+  document.getElementById('homeVenues').innerHTML = html;
+  
+  // 填充预约表单场地选项
+  const select = document.getElementById('bookVenue');
+  if (select) {
+    select.innerHTML = '<option value="">请选择场地</option>' + venues.filter(v => v.status === 'open').map(v => `<option value="${v.name}">${v.icon} ${v.name}</option>`).join('');
+  }
+}
+
+// ========== Bookings ==========
+function openBookingModal(venueName) {
+  document.getElementById('bookVenue').value = venueName;
+  document.getElementById('bookingModal').classList.add('show');
+}
+function submitBooking() {
+  const venue = document.getElementById('bookVenue').value;
+  const date = document.getElementById('bookDate').value;
+  const time = document.getElementById('bookTime').value;
+  const purpose = document.getElementById('bookPurpose').value.trim();
+  if (!venue || !date || !time || !purpose) { showToast('请填写完整信息', 'error'); return; }
+  const today = new Date().toISOString().split('T')[0];
+  if (date < today) { showToast('不能预约过去的日期', 'error'); return; }
+  
+  const booking = { id: Date.now(), venue, date, time, purpose, status: 'pending', user: currentUser.name, userType: currentUser.type === 'student' ? '学生' : '教师', account: currentUser.account };
+  bookings.push(booking);
+  localStorage.setItem('campusBookings', JSON.stringify(bookings));
+  showToast('预约成功，请等待审核', 'success');
+  closeModal('bookingModal');
+  document.getElementById('bookDate').value = '';
+  document.getElementById('bookTime').value = '';
+  document.getElementById('bookPurpose').value = '';
+  loadMyBookings();
+}
+function loadMyBookings() {
+  const filter = document.getElementById('myBookingFilter')?.value || '';
+  let filtered = bookings.filter(b => b.account === currentUser.account);
+  if (filter) filtered = filtered.filter(b => b.status === filter);
+  
+  const statusMap = { pending: ['待审核', 'pending'], approved: ['已通过', 'approved'], rejected: ['已拒绝', 'rejected'], completed: ['已完成', 'completed'] };
+  document.getElementById('myBookingList').innerHTML = filtered.length ? filtered.map(b => {
+    const [text, cls] = statusMap[b.status] || [b.status, ''];
+    return `<tr><td>${b.venue}</td><td>${b.date}</td><td>${b.time}</td><td>${b.purpose}</td><td><span class="status ${cls}">${text}</span></td><td>${b.status === 'pending' ? `<button class="btn btn-danger btn-xs" onclick="cancelBooking(${b.id})">取消</button>` : '-'}</td></tr>`;
+  }).join('') : '<tr><td colspan="6" style="text-align:center;color:#999;padding:2rem;">暂无预约记录</td></tr>';
+}
+function cancelBooking(id) {
+  if (!confirm('确定取消吗？')) return;
+  bookings = bookings.filter(b => b.id !== id);
+  localStorage.setItem('campusBookings', JSON.stringify(bookings));
+  showToast('已取消', 'success');
+  loadMyBookings();
+}
+
+// ========== Stats ==========
+function updateStats() {
+  const myBookings = bookings.filter(b => b.account === currentUser.account);
+  document.getElementById('statTotal').textContent = myBookings.length;
+  document.getElementById('statPending').textContent = myBookings.filter(b => b.status === 'pending').length;
+  document.getElementById('statApproved').textContent = myBookings.filter(b => b.status === 'approved').length;
+  document.getElementById('statVenues').textContent = venues.filter(v => v.status === 'open').length;
+}
+
+// ========== Admin ==========
+function loadAdminData() {
+  // 待审核
+  const pending = bookings.filter(b => b.status === 'pending');
+  document.getElementById('pendingList').innerHTML = pending.length ? pending.map(b => `<tr><td>${b.user}</td><td>${b.userType}</td><td>${b.venue}</td><td>${b.date}</td><td>${b.time}</td><td>${b.purpose}</td><td><button class="btn btn-success btn-xs" onclick="approveBooking(${b.id})">通过</button><button class="btn btn-danger btn-xs" onclick="rejectBooking(${b.id})" style="margin-left:5px;">拒绝</button></td></tr>`).join('') : '<tr><td colspan="7" style="text-align:center;color:#999;">暂无待审核</td></tr>';
+  // 所有记录
+  const statusMap = { pending: ['待审核', 'pending'], approved: ['已通过', 'approved'], rejected: ['已拒绝', 'rejected'] };
+  document.getElementById('allBookingList').innerHTML = bookings.length ? bookings.map(b => { const [text, cls] = statusMap[b.status] || [b.status, '']; return `<tr><td>${b.user}</td><td>${b.userType}</td><td>${b.venue}</td><td>${b.date}</td><td>${b.time}</td><td><span class="status ${cls}">${text}</span></td></tr>`; }).join('') : '<tr><td colspan="6" style="text-align:center;color:#999;">暂无记录</td></tr>';
+  // 场地管理
+  document.getElementById('venueManageList').innerHTML = venues.map(v => `<tr><td>${v.icon} ${v.name}</td><td>${v.type}</td><td>${v.location}</td><td><span class="status ${v.status === 'open' ? 'approved' : 'rejected'}">${v.status === 'open' ? '启用' : '停用'}</span></td><td><button class="btn btn-xs ${v.status === 'open' ? 'btn-danger' : 'btn-success'}" onclick="toggleVenue(${v.id})">${v.status === 'open' ? '停用' : '启用'}</button></td></tr>`).join('');
+}
+function approveBooking(id) {
+  const b = bookings.find(b => b.id === id);
+  if (b) { b.status = 'approved'; localStorage.setItem('campusBookings', JSON.stringify(bookings)); showToast('已通过', 'success'); loadAdminData(); }
+}
+function rejectBooking(id) {
+  const b = bookings.find(b => b.id === id);
+  if (b) { b.status = 'rejected'; localStorage.setItem('campusBookings', JSON.stringify(bookings)); showToast('已拒绝', 'success'); loadAdminData(); }
+}
+function toggleVenue(id) {
+  const v = venues.find(v => v.id === id);
+  if (v) { v.status = v.status === 'open' ? 'busy' : 'open'; showToast('已更新', 'success'); loadAdminData(); loadVenues(); }
+}
+function showAddVenueModal() { document.getElementById('addVenueModal').classList.add('show'); }
+function submitAddVenue() {
+  const name = document.getElementById('addVenueName').value.trim();
+  const type = document.getElementById('addVenueType').value;
+  const location = document.getElementById('addVenueLocation').value.trim();
+  const capacity = document.getElementById('addVenueCapacity').value;
+  const time = document.getElementById('addVenueTime').value;
+  if (!name || !type || !location) { showToast('请填写完整信息', 'error'); return; }
+  const icons = { '体育馆': '🏃', '教室': '🏫', '会议室': '🏢' };
+  venues.push({ id: Date.now(), name, type, icon: icons[type] || '🏢', location, capacity: capacity || 0, time: time || '08:00-22:00', status: 'open' });
+  showToast('添加成功', 'success');
+  closeModal('addVenueModal');
+  document.getElementById('addVenueName').value = '';
+  document.getElementById('addVenueLocation').value = '';
+  document.getElementById('addVenueCapacity').value = '';
+  loadAdminData();
+}
+
+// ========== Modal ==========
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('show'); }));
+
+// ========== Toast ==========
+function showToast(msg, type = 'info') { const t = document.getElementById('toast'); t.textContent = msg; t.className = 'toast show ' + type; t.style.display = 'flex'; setTimeout(() => t.classList.remove('show'), 3000); }
+</script>
+</body>
+</html>
